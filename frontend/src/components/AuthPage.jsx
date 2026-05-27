@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-const AUTH_API_URL = "http://localhost:5000/api/auth";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+// const AUTH_API_URL = "http://localhost:5000/api/auth";
 
 export default function AuthPage({ onAuthSuccess }) {
   const [showAuth, setShowAuth] = useState(false); // ⚡ Handles Landing vs Auth view toggle
@@ -20,7 +21,7 @@ export default function AuthPage({ onAuthSuccess }) {
     const endpoint = isSignUp ? "/register" : "/login";
 
     try {
-      const response = await axios.post(`${AUTH_API_URL}${endpoint}`, {
+      const response = await axios.post(`${API_BASE_URL}/auth${endpoint}`, {
         email: email.trim(),
         password: password,
       });
@@ -43,7 +44,7 @@ export default function AuthPage({ onAuthSuccess }) {
   const handleGuestLogin = async () => {
     setLoading(true);
     try {
-      const response = await axios.post(`${AUTH_API_URL}/guest`);
+      const response = await axios.post(`${API_BASE_URL}/auth/guest`);
       const { token } = response.data;
 
       localStorage.setItem("supabase_session_token", token);

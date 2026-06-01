@@ -28,7 +28,7 @@ export default function Column({
     const title = column.title.toLowerCase();
     if (title.includes("done") || title.includes("complete")) {
       return isDarkMode
-        ? "bg-emerald-950/10 border-emerald-900/30"
+        ? "bg-emerald-600/10 border-emerald-900/30"
         : "bg-emerald-50 border-emerald-200";
     } else if (title.includes("progress") || title.includes("doing")) {
       return isDarkMode
